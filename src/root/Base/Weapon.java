@@ -11,7 +11,7 @@ public class Weapon extends Item {
 
 
     public Weapon(String name, int requiredLevel, int damage, int attackSpeed) {
-        super();
+        super(name, requiredLevel);
         this.damage = damage;
 
         this.attackSpeed = attackSpeed;

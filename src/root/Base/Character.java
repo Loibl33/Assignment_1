@@ -5,6 +5,7 @@ package root.Base;
 //todo gitlab
 //todo commit
 //todo submit link
+//todo exceptions richten: throw new e.newInstance() oder so
 
 
 import root.Exceptions.ArmorNotSuitableForCharacterException;
@@ -23,24 +24,37 @@ public abstract class Character {
     int damage;
     String name;
     int level;
-    int dps;
+    int characterDps;
 
     public Character(String name) {
         this.name = name;
         this.level = 1;
         this.equipment = new Equipment();
+        //this.characterDps = calcCharacterDps();
+    }
+
+    public int calcCharacterDps() {
+        int totalAttr = 0;
+        totalAttr += this.totoalPrimaryAttribute.getStrength();
+        totalAttr += this.totoalPrimaryAttribute.getDexterity();
+        totalAttr += this.totoalPrimaryAttribute.getIntelligence();
+        this.characterDps = ((Weapon) this.equipment.get(Slot.Weapon)).getDps() * (1 + totalAttr / 100);
+        return this.characterDps;
     }
 
 //    public abstract int increaseDamage();
 
     public abstract int increaseLevel();
 
-    public void equip(Item item) throws WeaponNotSuitableForCharacterException, LevelTooLowForArmorException, IllegalAccessException, InstantiationException {
+    public void equip(Item item) throws Throwable {
 
-        ArrayList<Class> exceptions = new ArrayList<>();
+        ArrayList<Throwable> exceptions = new ArrayList<>();
         boolean isWeapon = true;
         Class c = Weapon.class;
-        boolean levelOK = (this.level >= item.getRequiredLevel());
+        boolean levelOK = false;
+        if (this.level >= item.getRequiredLevel()) {
+            levelOK = true;
+        }
         boolean itemOK = EquipAllowedForCharacter.getInstance().get(this.getClass()).contains(item.getClass());
 
         if (item instanceof Armor) {
@@ -56,25 +70,27 @@ public abstract class Character {
 
             if (isWeapon) {
                 if (!levelOK) {
-                    exceptions.add(LevelTooLowForWeaponException.class);
+                    exceptions.add(new LevelTooLowForWeaponException());
                 }
                 if (!itemOK) {
-                    exceptions.add(WeaponNotSuitableForCharacterException.class);
+                    exceptions.add(new WeaponNotSuitableForCharacterException());
                 }
             }
 
             if (!isWeapon) {
                 if (!levelOK) {
-                    exceptions.add(LevelTooLowForArmorException.class);
+                    exceptions.add(new LevelTooLowForArmorException());
                 }
                 if (!itemOK) {
-                    exceptions.add(ArmorNotSuitableForCharacterException.class);
+                    exceptions.add(new ArmorNotSuitableForCharacterException());
                 }
             }
 
             try {
-                for (Class e : exceptions) {
-                    e.newInstance();
+                for (Throwable e : exceptions) {
+                    //e.printStackTrace();
+                    throw e;
+
                 }
             } finally {
                 exceptions.clear();
@@ -82,7 +98,7 @@ public abstract class Character {
             exceptions.clear();
         }
 
-
+        calcCharacterDps();
     }
 
     private void addEquipment(Item item, boolean isWeapon) {
@@ -112,7 +128,7 @@ public abstract class Character {
                 ", basePrimaryAttribute=" + basePrimaryAttribute +
                 ", totoalPrimaryAttribute=" + totoalPrimaryAttribute +
                 ", equipment=" + equipment +
-                ", dps=" + dps +
+                ", dps=" + characterDps +
                 '}';
     }
 
@@ -122,7 +138,7 @@ public abstract class Character {
                 ", name='" + name + '\'' +
                 ", level=" + level +
                 ", totoalPrimaryAttribute=" + totoalPrimaryAttribute +
-                ", dps=" + dps +
+                ", dps=" + characterDps +
                 '}';
     }
 }
