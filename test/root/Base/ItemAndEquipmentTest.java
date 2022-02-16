@@ -118,7 +118,7 @@ public class ItemAndEquipmentTest {
     void CharacterCalculateDPS_CharacterExitsLevel1AxeEquipped_ShouldReturnCorrectDPS() throws Throwable {
         warrior.equip(axe);
         int isDps = warrior.getCharacterDps();
-        int shouldDps = (int) (7 * 1.1) * (1 + (5 / 100));
+        int shouldDps = 9;
         Assertions.assertEquals(shouldDps, isDps);
     }
 
@@ -127,7 +127,7 @@ public class ItemAndEquipmentTest {
         warrior.equip(axe);
         warrior.equip(plate);
         int isDps = warrior.getCharacterDps();
-        int shouldDps = (int) (7 * 1.1) * (1 + ((5 + 1) / 100));
+        int shouldDps = 9;
         Assertions.assertEquals(shouldDps, isDps);
     }
 }
