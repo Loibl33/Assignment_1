@@ -1,6 +1,6 @@
 # First Assignment (Java)
 
-**Console application in Java for a RP-Game**
+**Console application in Java for an RP-Game**
 
 
 ## Maintainers

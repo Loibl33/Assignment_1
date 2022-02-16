@@ -16,13 +16,13 @@ import java.util.Arrays;
 
 @lombok.Data
 public abstract class Character {
-    public PrimaryAttribute basePrimaryAttribute;
-    public PrimaryAttribute totoalPrimaryAttribute;
-    public Equipment equipment;
-    int damage;
-    String name;
-    int level;
-    int characterDps;
+    private PrimaryAttribute basePrimaryAttribute;
+    private PrimaryAttribute totalPrimaryAttribute;
+    private Equipment equipment;
+    private int damage;
+    private String name;
+    private int level;
+    private int characterDps;
 
     public Character(String name) {
         this.name = name;
@@ -35,9 +35,9 @@ public abstract class Character {
     public int calcCharacterDps() {
         int totalAttr = 0;
         int weaponDps;
-        totalAttr += this.totoalPrimaryAttribute.getStrength();
-        totalAttr += this.totoalPrimaryAttribute.getDexterity();
-        totalAttr += this.totoalPrimaryAttribute.getIntelligence();
+        totalAttr += this.totalPrimaryAttribute.getStrength();
+        totalAttr += this.totalPrimaryAttribute.getDexterity();
+        totalAttr += this.totalPrimaryAttribute.getIntelligence();
         try {
             weaponDps = ((Weapon) this.equipment.get(Slot.Weapon)).getDps();
         } catch (Exception exc) {
@@ -89,7 +89,6 @@ public abstract class Character {
             } finally {
                 exceptions.clear();
             }
-            exceptions.clear();
         }
         calcCharacterDps();
         return successfull;
@@ -112,7 +111,7 @@ public abstract class Character {
                 ", name='" + name + '\'' +
                 ", level=" + level +
                 ", basePrimaryAttribute=" + basePrimaryAttribute +
-                ", totoalPrimaryAttribute=" + totoalPrimaryAttribute +
+                ", totoalPrimaryAttribute=" + totalPrimaryAttribute +
                 ", equipment=" + equipment +
                 ", dps=" + characterDps +
                 '}';
@@ -124,9 +123,9 @@ public abstract class Character {
                 ", damage=" + damage +
                 ", name='" + name + '\'' +
                 ", level=" + level +
-                ", Strength=" + totoalPrimaryAttribute.getStrength() +
-                ", Dexterity=" + totoalPrimaryAttribute.getDexterity() +
-                ", Intelligence=" + totoalPrimaryAttribute.getIntelligence() +
+                ", Strength=" + totalPrimaryAttribute.getStrength() +
+                ", Dexterity=" + totalPrimaryAttribute.getDexterity() +
+                ", Intelligence=" + totalPrimaryAttribute.getIntelligence() +
                 ", dps=" + characterDps +
                 '}';
     }

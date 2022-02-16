@@ -12,18 +12,18 @@ import root.Base.PrimaryAttribute;
 public class Ranger extends Character {
     public Ranger(String name) {
         super(name);
-        this.basePrimaryAttribute = new PrimaryAttribute(1, 7, 1);
-        this.totoalPrimaryAttribute = this.basePrimaryAttribute;
+        this.setBasePrimaryAttribute(new PrimaryAttribute(1, 7, 1));
+        this.setTotalPrimaryAttribute(this.getBasePrimaryAttribute());
     }
 
     @Override
     public int increaseLevel() {
-        int newStrength = this.totoalPrimaryAttribute.getStrength() + 1;
-        int newDexterity = this.totoalPrimaryAttribute.getDexterity() + 5;
-        int newIntelligence = this.totoalPrimaryAttribute.getIntelligence() + 1;
+        int newStrength = this.getTotalPrimaryAttribute().getStrength() + 1;
+        int newDexterity = this.getTotalPrimaryAttribute().getDexterity() + 5;
+        int newIntelligence = this.getTotalPrimaryAttribute().getIntelligence() + 1;
         int newDamage = this.getDamage() + 5;
         int newLevel = this.getLevel() + 1;
-        this.totoalPrimaryAttribute = new PrimaryAttribute(newStrength, newDexterity, newIntelligence);
+        this.setTotalPrimaryAttribute(new PrimaryAttribute(newStrength, newDexterity, newIntelligence));
         this.setDamage(newDamage);
         this.setLevel(newLevel);
         return this.getLevel();

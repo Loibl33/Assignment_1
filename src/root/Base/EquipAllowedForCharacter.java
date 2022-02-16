@@ -23,23 +23,23 @@ public class EquipAllowedForCharacter extends HashMap<Class, ArrayList<Class>> {
     private static EquipAllowedForCharacter INSTANCE;
 
     private EquipAllowedForCharacter() {
-        ArrayList<Class> Mage = new ArrayList<Class>();
+        ArrayList<Class> Mage = new ArrayList<>();
         Mage.add(Staff.class);
         Mage.add(Wand.class);
         Mage.add(Cloth.class);
 
-        ArrayList<Class> Ranger = new ArrayList<Class>();
+        ArrayList<Class> Ranger = new ArrayList<>();
         Ranger.add(Bow.class);
         Ranger.add(Leather.class);
         Ranger.add(Mail.class);
 
-        ArrayList<Class> Rogue = new ArrayList<Class>();
+        ArrayList<Class> Rogue = new ArrayList<>();
         Rogue.add(Dagger.class);
         Rogue.add(Sword.class);
         Rogue.add(Leather.class);
         Rogue.add(Mail.class);
 
-        ArrayList<Class> Warrior = new ArrayList<Class>();
+        ArrayList<Class> Warrior = new ArrayList<>();
         Warrior.add(Axe.class);
         Warrior.add(Hammer.class);
         Warrior.add(Sword.class);
