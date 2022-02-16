@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class PrimaryAttribute {
-
     private int Strength;
     private int Dexterity;
     private int Intelligence;
@@ -13,9 +12,6 @@ public class PrimaryAttribute {
         Strength = strength;
         Dexterity = dexterity;
         Intelligence = intelligence;
-    }
-
-    public PrimaryAttribute() {
     }
 
     @Override

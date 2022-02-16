@@ -1,6 +1,6 @@
 package root.Base;
 
-enum Slot {
+public enum Slot {
     Head,
     Body,
     Legs,

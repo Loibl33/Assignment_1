@@ -1,23 +1,15 @@
 package root.Base;
 
-//todo calculate DPS function
-//todo write test
-//todo gitlab
-//todo commit
-//todo submit link
-//todo exceptions richten: throw new e.newInstance() oder so
-
-
 import root.Exceptions.ArmorNotSuitableForCharacterException;
 import root.Exceptions.LevelTooLowForArmorException;
 import root.Exceptions.LevelTooLowForWeaponException;
 import root.Exceptions.WeaponNotSuitableForCharacterException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @lombok.Data
 public abstract class Character {
-
     public PrimaryAttribute basePrimaryAttribute;
     public PrimaryAttribute totoalPrimaryAttribute;
     public Equipment equipment;
@@ -30,24 +22,31 @@ public abstract class Character {
         this.name = name;
         this.level = 1;
         this.equipment = new Equipment();
+        this.damage = 1;
+        this.characterDps = 1;
         //this.characterDps = calcCharacterDps();
     }
 
     public int calcCharacterDps() {
         int totalAttr = 0;
+        int weaponDps;
         totalAttr += this.totoalPrimaryAttribute.getStrength();
         totalAttr += this.totoalPrimaryAttribute.getDexterity();
         totalAttr += this.totoalPrimaryAttribute.getIntelligence();
-        this.characterDps = ((Weapon) this.equipment.get(Slot.Weapon)).getDps() * (1 + totalAttr / 100);
+        try {
+            weaponDps = ((Weapon) this.equipment.get(Slot.Weapon)).getDps();
+        } catch (Exception exc) {
+            weaponDps = 1;
+        }
+        this.characterDps = weaponDps * (1 + totalAttr / 100);
         return this.characterDps;
     }
 
-//    public abstract int increaseDamage();
-
+    //    public abstract int increaseDamage();
     public abstract int increaseLevel();
 
-    public void equip(Item item) throws Throwable {
-
+    public boolean equip(Item item) throws Throwable {
+        boolean successfull = false;
         ArrayList<Throwable> exceptions = new ArrayList<>();
         boolean isWeapon = true;
         Class c = Weapon.class;
@@ -56,18 +55,14 @@ public abstract class Character {
             levelOK = true;
         }
         boolean itemOK = EquipAllowedForCharacter.getInstance().get(this.getClass()).contains(item.getClass());
-
         if (item instanceof Armor) {
             isWeapon = false;
             c = Armor.class;
         }
-
-
         if (levelOK && itemOK) {
+            successfull = true;
             addEquipment(item, isWeapon);
         } else {
-
-
             if (isWeapon) {
                 if (!levelOK) {
                     exceptions.add(new LevelTooLowForWeaponException());
@@ -76,7 +71,6 @@ public abstract class Character {
                     exceptions.add(new WeaponNotSuitableForCharacterException());
                 }
             }
-
             if (!isWeapon) {
                 if (!levelOK) {
                     exceptions.add(new LevelTooLowForArmorException());
@@ -85,20 +79,18 @@ public abstract class Character {
                     exceptions.add(new ArmorNotSuitableForCharacterException());
                 }
             }
-
             try {
                 for (Throwable e : exceptions) {
                     //e.printStackTrace();
                     throw e;
-
                 }
             } finally {
                 exceptions.clear();
             }
             exceptions.clear();
         }
-
         calcCharacterDps();
+        return successfull;
     }
 
     private void addEquipment(Item item, boolean isWeapon) {
@@ -106,18 +98,10 @@ public abstract class Character {
             this.equipment.put(Slot.Weapon, item);
         }
         if (!isWeapon) {
-            this.equipment.put(Slot.Body, item);
+            Slot randomNonWeaponSlot = Arrays.stream(Slot.values()).filter(e -> !e.equals(Slot.Weapon)).findAny().get();
+            this.equipment.put(randomNonWeaponSlot, item);
         }
     }
-
-
-    //Todo: Function calc Dps: root.Base.Weapon-Dps * (1+TotalMainPrimAttr/100)
-    //Todo: Function calc totalprimattr: bpa + sum(equip)
-    //todo: function increaseLevel , done
-    //Todo: constructor: level=1 ; name , done
-    //todo: tostring: name, level, s,d,I,Dps, stat
-    //todo: if no weapon: weapon-dps = 1
-
 
     @Override
     public String toString() {
@@ -134,10 +118,14 @@ public abstract class Character {
 
     public String stats() {
         return "Character{" +
-                "damage=" + damage +
+                "Class=" + this.getClass() +
+                ", damage=" + damage +
                 ", name='" + name + '\'' +
                 ", level=" + level +
-                ", totoalPrimaryAttribute=" + totoalPrimaryAttribute +
+//                ", totoalPrimaryAttribute=" + totoalPrimaryAttribute +
+                ", Strength=" + totoalPrimaryAttribute.getStrength() +
+                ", Dexterity=" + totoalPrimaryAttribute.getDexterity() +
+                ", Intelligence=" + totoalPrimaryAttribute.getIntelligence() +
                 ", dps=" + characterDps +
                 '}';
     }

@@ -3,21 +3,12 @@ package root.Characters;
 import root.Base.Character;
 import root.Base.PrimaryAttribute;
 
-@lombok.Data
 public class Rogue extends Character {
-
     public Rogue(String name) {
         super(name);
         this.basePrimaryAttribute = new PrimaryAttribute(2, 6, 1);
         this.totoalPrimaryAttribute = this.basePrimaryAttribute;
-
-
     }
-
-//    @Override
-//    public int increaseDamage() {
-//        return 0;
-//    }
 
     @Override
     public int increaseLevel() {
@@ -26,11 +17,9 @@ public class Rogue extends Character {
         int newIntelligence = this.totoalPrimaryAttribute.getIntelligence() + 1;
         int newDamage = this.getDamage() + 4;
         int newLevel = this.getLevel() + 1;
-
         this.totoalPrimaryAttribute = new PrimaryAttribute(newStrength, newDexterity, newIntelligence);
         this.setDamage(newDamage);
         this.setLevel(newLevel);
-
         return this.getLevel();
     }
 }
