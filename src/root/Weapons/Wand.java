@@ -1,3 +1,10 @@
+// Code by Philipp Loibl, 2022
+// Wand.java
+//
+// This class defines the weapon type wand
+
+
+
 package root.Weapons;
 
 import root.Base.Weapon;

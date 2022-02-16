@@ -1,3 +1,9 @@
+// Code by Philipp Loibl, 2022
+// Equipment.java
+//
+// This class defines the structure of a characters equipment
+
+
 package root.Base;
 
 import java.util.HashMap;

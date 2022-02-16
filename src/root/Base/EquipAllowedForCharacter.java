@@ -1,3 +1,9 @@
+// Code by Philipp Loibl, 2022
+// EquipAllowedForCharacter.java
+//
+// This class defines which type of character can equip which type of items
+
+
 package root.Base;
 
 import root.Armors.Cloth;

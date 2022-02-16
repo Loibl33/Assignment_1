@@ -1,3 +1,9 @@
+// Code by Philipp Loibl, 2022
+// Weapon.java
+//
+// This class is the base class all weapon types
+
+
 package root.Base;
 
 import lombok.Data;

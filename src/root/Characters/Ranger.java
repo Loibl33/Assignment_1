@@ -1,3 +1,9 @@
+// Code by Philipp Loibl, 2022
+// Ranger.java
+//
+// This class defines the character Ranger
+
+
 package root.Characters;
 
 import root.Base.Character;

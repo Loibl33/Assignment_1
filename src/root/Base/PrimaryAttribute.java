@@ -1,3 +1,11 @@
+// Code by Philipp Loibl, 2022
+// PrimaryAttribute.java
+//
+// This class defines the primary attribute of character
+// The primary attribute consists of strength, dexterity and intelligence
+
+
+
 package root.Base;
 
 import lombok.Data;

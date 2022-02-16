@@ -1,3 +1,10 @@
+// Code by Philipp Loibl, 2022
+// ItemAndEquipmentTest.java
+//
+// This class tests the correct behaviour of items and characters
+
+
+
 package root.Base;
 
 import org.junit.jupiter.api.Assertions;
@@ -20,6 +27,7 @@ public class ItemAndEquipmentTest {
     Bow bow;
     Cloth cloth;
 
+    //Sets up a warrior and various items
     @BeforeEach
     void setUp() {
         warrior = new Warrior("Bill");
@@ -29,6 +37,7 @@ public class ItemAndEquipmentTest {
         cloth = new Cloth("Cloth", 1);
     }
 
+    //Tests if a warrior can equip an axe, if required level is met
     @Test
     void CharacterEquip_CharacterAndItemsExist_EquipWarriorWithAxe() {
         try {
@@ -41,6 +50,7 @@ public class ItemAndEquipmentTest {
         Assertions.assertEquals(shouldString, isString);
     }
 
+    //Tests if a warrior can equip a plate, if required level is met
     @Test
     void CharacterEquip_CharacterAndItemsExist_EquipWarriorWithPlate() {
         try {
@@ -53,40 +63,49 @@ public class ItemAndEquipmentTest {
         Assertions.assertTrue(successful);
     }
 
+    //Tests if correct exception is thrown if a warrior tries to equip a weapon he is not allowed to
     @Test
     void CharacterEquip_CharacterAndItemsExist_ShouldThrowWeaponNotSuitableForCharacterException() throws Throwable {
         Assertions.assertThrows(WeaponNotSuitableForCharacterException.class, () -> warrior.equip(bow));
     }
 
+    //Tests if correct exception is thrown if a warrior tries to equip an armor he is not allowed to
     @Test
     void CharacterEquip_CharacterAndItemsExist_ShouldThrowArmorNotSuitableForCharacterException() throws Throwable {
         Assertions.assertThrows(ArmorNotSuitableForCharacterException.class, () -> warrior.equip(cloth));
     }
 
+    //Tests if correct exception is thrown if a warrior tries to equip a weapon which
+    //required level he does not meet
     @Test
     void CharacterEquip_CharacterAndItemsExist_ShouldThrowLevelTooLowForWeaponException() throws Throwable {
         axe.setRequiredLevel(2);
         Assertions.assertThrows(LevelTooLowForWeaponException.class, () -> warrior.equip(axe));
     }
 
+    //Tests if correct exception is thrown if a warrior tries to equip an armor which
+    //required level he does not meet
     @Test
     void CharacterEquip_CharacterAndItemsExist_ShouldThrowLevelTooLowForArmorException() throws Throwable {
         plate.setRequiredLevel(2);
         Assertions.assertThrows(LevelTooLowForArmorException.class, () -> warrior.equip(plate));
     }
 
+    //Tests if return value is true if warrior successfully equips an axe
     @Test
     void CharacterEquip_CharacterAndWeaponExist_ShouldReturnTrue() throws Throwable {
         boolean successfull = warrior.equip(axe);
         Assertions.assertEquals(true, successfull);
     }
 
+    //Tests if return value is true if warrior successfully equips a plate
     @Test
     void CharacterEquip_CharacterAndArmorExist_ShouldReturnTrue() throws Throwable {
         boolean successfull = warrior.equip(plate);
         Assertions.assertEquals(true, successfull);
     }
 
+    //Tests if the dps of a warrior is calculated correctly, if he has level one and no items
     @Test
     void CharacterCalculateDPS_CharacterExitsAndHasNoWeapon_ShouldReturnCorrectDPS() throws Throwable {
         int isDps = warrior.getCharacterDps();
@@ -94,6 +113,7 @@ public class ItemAndEquipmentTest {
         Assertions.assertEquals(shouldDps, isDps);
     }
 
+    //Tests if the dps of a warrior is calculated correctly, if he has level one and an axe
     @Test
     void CharacterCalculateDPS_CharacterExitsLevel1AxeEquipped_ShouldReturnCorrectDPS() throws Throwable {
         warrior.equip(axe);

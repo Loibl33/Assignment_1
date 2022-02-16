@@ -1,3 +1,9 @@
+// Code by Philipp Loibl, 2022
+// Axe.java
+//
+// This class defines the weapon type axe
+
+
 package root.Weapons;
 
 import root.Base.Weapon;

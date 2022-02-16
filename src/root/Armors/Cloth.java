@@ -1,3 +1,9 @@
+// Code by Philipp Loibl, 2022
+// Cloth.java
+//
+// This class defines the armor type cloth
+
+
 package root.Armors;
 
 import root.Base.Armor;

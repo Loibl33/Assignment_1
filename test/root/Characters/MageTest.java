@@ -1,3 +1,10 @@
+// Code by Philipp Loibl, 2022
+// MageTest.java
+//
+// This class tests the correct behaviour of mages
+
+
+
 package root.Characters;
 
 import org.junit.jupiter.api.Assertions;
@@ -9,11 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MageTest {
     Mage mage;
 
+    //Creates a new mage before each test
     @BeforeEach
     void setUp() {
         mage = new Mage("Anna");
     }
 
+    //Tests if the level of the mage is one after creation
     @Test
     void Mage_NoConditions_LevelShouldBeOneAfterConstruction() {
         int shouldLevel = 1;
@@ -21,6 +30,7 @@ class MageTest {
         Assertions.assertEquals(shouldLevel, isLevel);
     }
 
+    //Tests if all mage properties are set up correctly during creation
     @Test
     void Mage_NoConditions_PropertiesShouldBeSetCorrectly() {
         String shouldStats = "Character{Class=class root.Characters.Mage, damage=1, name='Anna', level=1, Strength=1, Dexterity=1, Intelligence=8, dps=1}";
@@ -30,6 +40,7 @@ class MageTest {
         );
     }
 
+    //Tests if the properties get updated like specified during increaseLevel()
     @Test
     void increaseLevel_MageExists_MageLevelShouldBeIncreasedCorrectly() {
         mage = new Mage("Anna");

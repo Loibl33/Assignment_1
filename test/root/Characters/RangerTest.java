@@ -1,3 +1,9 @@
+// Code by Philipp Loibl, 2022
+// RangerTest.java
+//
+// This class tests the correct behaviour of rangers
+
+
 package root.Characters;
 
 import org.junit.jupiter.api.Assertions;
@@ -9,11 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class RangerTest {
     Ranger ranger;
 
+    //Creates a new ranger before each test
     @BeforeEach
     void setUp() {
         ranger = new Ranger("John");
     }
 
+    //Tests if the level of the ranger is one after creation
     @Test
     void Ranger_NoConditions_LevelShouldBeOneAfterConstruction() {
         int shouldLevel = 1;
@@ -21,6 +29,7 @@ class RangerTest {
         Assertions.assertEquals(shouldLevel, isLevel);
     }
 
+    //Tests if all ranger properties are set up correctly during creation
     @Test
     void Ranger_NoConditions_PropertiesShouldBeSetCorrectly() {
         String shouldStats = "Character{Class=class root.Characters.Ranger, damage=1, name='John', level=1, Strength=1, Dexterity=7, Intelligence=1, dps=1}";
@@ -30,6 +39,7 @@ class RangerTest {
         );
     }
 
+    //Tests if the properties get updated like specified during increaseLevel()
     @Test
     void increaseLevel_RangerExists_RangerLevelShouldBeIncreasedCorrectly() {
         ranger.increaseLevel();

@@ -1,3 +1,10 @@
+// Code by Philipp Loibl, 2022
+// Staff.java
+//
+// This class defines the weapon type staff
+
+
+
 package root.Weapons;
 
 import root.Base.Weapon;

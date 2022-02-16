@@ -1,3 +1,9 @@
+// Code by Philipp Loibl, 2022
+// Item.java
+//
+// This is the base class for weapon and armor classes
+
+
 package root.Base;
 
 import lombok.Data;

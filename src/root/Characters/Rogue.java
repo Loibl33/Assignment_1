@@ -1,3 +1,9 @@
+// Code by Philipp Loibl, 2022
+// Rogue.java
+//
+// This class defines the character Rogue
+
+
 package root.Characters;
 
 import root.Base.Character;

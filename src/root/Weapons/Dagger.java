@@ -1,3 +1,10 @@
+// Code by Philipp Loibl, 2022
+// Dagger.java
+//
+// This class defines the weapon type dagger
+
+
+
 package root.Weapons;
 
 

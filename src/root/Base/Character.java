@@ -1,3 +1,9 @@
+// Code by Philipp Loibl, 2022
+// Character.java
+//
+// This class defines a character
+
+
 package root.Base;
 
 import root.Exceptions.ArmorNotSuitableForCharacterException;
@@ -24,7 +30,6 @@ public abstract class Character {
         this.equipment = new Equipment();
         this.damage = 1;
         this.characterDps = 1;
-        //this.characterDps = calcCharacterDps();
     }
 
     public int calcCharacterDps() {
@@ -42,14 +47,12 @@ public abstract class Character {
         return this.characterDps;
     }
 
-    //    public abstract int increaseDamage();
     public abstract int increaseLevel();
 
     public boolean equip(Item item) throws Throwable {
         boolean successfull = false;
         ArrayList<Throwable> exceptions = new ArrayList<>();
         boolean isWeapon = true;
-        Class c = Weapon.class;
         boolean levelOK = false;
         if (this.level >= item.getRequiredLevel()) {
             levelOK = true;
@@ -57,7 +60,6 @@ public abstract class Character {
         boolean itemOK = EquipAllowedForCharacter.getInstance().get(this.getClass()).contains(item.getClass());
         if (item instanceof Armor) {
             isWeapon = false;
-            c = Armor.class;
         }
         if (levelOK && itemOK) {
             successfull = true;
@@ -122,7 +124,6 @@ public abstract class Character {
                 ", damage=" + damage +
                 ", name='" + name + '\'' +
                 ", level=" + level +
-//                ", totoalPrimaryAttribute=" + totoalPrimaryAttribute +
                 ", Strength=" + totoalPrimaryAttribute.getStrength() +
                 ", Dexterity=" + totoalPrimaryAttribute.getDexterity() +
                 ", Intelligence=" + totoalPrimaryAttribute.getIntelligence() +
